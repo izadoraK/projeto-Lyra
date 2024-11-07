@@ -1,0 +1,166 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #e0ebe6;
+    color: #333;
+}
+
+header {
+    background-color: #5e7971;
+    padding: 20px;
+}
+
+header .logo {
+    color: #fff;
+    font-size: 24px;
+    display: inline-block;
+}
+
+header ul {
+    list-style: none;
+    display: inline-block;
+    float: right;
+}
+
+header ul li {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+header ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+header input[type="text"] {
+    padding: 5px;
+    margin-left: 20px;
+    border-radius: 5px;
+    border: none;
+}
+
+.center {
+    text-align: center;
+    padding: 50px 0;
+}
+
+.center h1 {
+    font-size: 48px;
+    color: #333;
+}
+
+.center p {
+    font-size: 16px;
+    color: #777;
+    margin-bottom: 30px;
+}
+
+.login {
+    display: inline-block;
+    width: 40%;
+}
+
+.login form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login input, 
+.login textarea {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.login button {
+    padding: 15px;
+    background-color: #5e7971;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+
+.newsletters h2 {
+    font-size: 24px;
+    color: #333;
+}
+
+.newsletters input[type="email"] {
+    padding: 15px;
+    width: 70%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.newsletters button {
+    padding: 15px;
+    background-color: #5e7971;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.contact-info {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.contact-info .info {
+    text-align: left;
+    margin-right: 50px;
+}
+
+.contact-info .info p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.map {
+    width: 400px;
+    height: 300px;
+}
+
+footer {
+    background-color: #5e7971;
+    padding: 30px;
+    text-align: center;
+    color: #fff;
+}
+
+footer .footer-content {
+    display: flex;
+    justify-content: space-around;
+}
+
+footer .footer-content h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+footer .footer-content ul {
+    list-style: none;
+}
+
+footer .footer-content ul li {
+    margin-bottom: 5px;
+}
+
+footer .footer-content ul li a {
+    color: #fff;
+    text-decoration: none;
+}
