@@ -19,9 +19,18 @@ header .logo {
     color: #fff;
     font-size: 24px;
     display: inline-block;
+    font-weight: bold;
+}
+
+.header .logo h1{
+    font-size: 30px;
+    color: #fff;
+    display: inline-block;
+    height: 15px;
 }
 
 header ul {
+    padding-left: 30px;
     list-style: none;
     display: inline-block;
 }
@@ -37,13 +46,6 @@ header ul li a {
     font-size: 16px;
 }
 
-header input[type="text"] {
-    padding: 5px;
-    margin-left: 20px;
-    border-radius: 5px;
-    border: none;
-}
-
 .center {
     text-align: center;
     padding: 50px 0;
@@ -55,24 +57,35 @@ header input[type="text"] {
     padding-bottom: 10px;
 }
 
+.center h3 {
+    font-size: 26px;
+    color: #777;
+    margin: 20px;
+}
+
 .center p {
     font-size: 16px;
     color: #777;
     margin-bottom: 30px;
 }
 
-.login {
+.login,
+.suporte,
+.historico {
     display: inline-block;
     width: 40%;
 }
 
-.login form {
+.login form,
+.suporte form {
     display: flex;
     flex-direction: column;
 }
 
 .login input, 
-.login textarea {
+.login textarea,
+.suporte input, 
+.suporte textarea  {
     margin-bottom: 20px;
     padding: 15px;
     border: 1px solid #ccc;
@@ -80,8 +93,22 @@ header input[type="text"] {
     font-size: 16px;
 }
 
-.login button {
+.login button,
+.recover-form button,
+.suporte button,
+.historico button {
     padding: 15px;
+    background-color: #5e7971;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.index button {
+    padding: 15px;
+    margin-bottom: 20px;
     background-color: #5e7971;
     color: #fff;
     border: none;
@@ -95,59 +122,6 @@ header input[type="text"] {
     text-decoration: none;
     padding-bottom: 15px;
 }
-
- /*
-.contact-info {
-    display: flex;
-    justify-content: center;
-    margin-top: 50px;
-}
-
-.contact-info .info {
-    text-align: left;
-    margin-right: 50px;
-}
-
-.contact-info .info p {
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
-.map {
-    width: 400px;
-    height: 300px;
-}
-
-footer {
-    background-color: #5e7971;
-    padding: 30px;
-    text-align: center;
-    color: #fff;
-}
-
-footer .footer-content {
-    display: flex;
-    justify-content: space-around;
-}
-
-footer .footer-content h3 {
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
-footer .footer-content ul {
-    list-style: none;
-}
-
-footer .footer-content ul li {
-    margin-bottom: 5px;
-}
-
-footer .footer-content ul li a {
-    color: #fff;
-    text-decoration: none;
-}
-*/
 
 .recover-form h2,
 .recover-form p {
@@ -171,13 +145,4 @@ footer .footer-content ul li a {
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
-}
-
-.recover-form button {
-    padding: 15px;
-    background-color: #5e7971;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
 }
