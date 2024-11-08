@@ -1,3 +1,4 @@
+/*estilizações gerais*/
 * {
     margin: 0;
     padding: 0;
@@ -22,12 +23,6 @@ header .logo {
     font-weight: bold;
 }
 
-.header .logo h1{
-    font-size: 30px;
-    color: #fff;
-    display: inline-block;
-    height: 15px;
-}
 
 header ul {
     padding-left: 30px;
@@ -106,9 +101,35 @@ header ul li a {
     font-size: 16px;
 }
 
-.index button {
-    padding: 15px;
+/*estilizações do index*/
+.left,
+.upper-right {
+    text-align: center;
+    display: inline-block;
+    padding: 20px;
+    border-radius: 5px;
+    vertical-align: top;
+}
+
+.upper-left,
+.bottom-left{
+    display: block;
+    padding: 24px;
     margin-bottom: 20px;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 0 10px gray;
+}
+
+.relogio{
+    font-size: 48px;
+    color: #5e7971;
+    padding-bottom: 10px;
+}
+
+.opcoes button {
+    padding: 20px;
+    margin: 20px;
     background-color: #5e7971;
     color: #fff;
     border: none;
@@ -117,6 +138,7 @@ header ul li a {
     font-size: 16px;
 }
 
+/*estilizações do login*/
 .login a{
     color: #5e7971;
     text-decoration: none;

@@ -21,20 +21,43 @@
 
     <section class="center">
         <h1>Lyra</h1>
-        <p>Inicie sua experiência!</p>
-        
-        <div class="index">
-            <form action="nova-recomendacao.html">
-                <button type="submit">Nova recomendação</button>
-            </form>
+        <p>Seja bem vindo!</p>
+        <div class="left">
+        <div class="upper-left" >
+            <div class="opcoes">
+                <form action="nova-recomendacao.html">
+                    <button type="submit">Nova recomendação</button>
+                </form>
 
-            <form action="favoritas.html">
-                <button type="submit">Minhas faixas favortias</button>
-            </form>
-
+                <form action="favoritas.html">
+                    <button type="submit">Minhas faixas favortias</button>
+                </form>
+            </div>
         </div>
 
+        <div class="bottom-left" >
+            <div class="relogio" id="clock">
+                
+            </div>
+        </div>
+    </div>
+        <div class="upper-right">
+            <div class="opcoes">
+                <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DX0XUsuxWHRQd" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            </div>
     </section>
-    
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const timeString = `${hours}:${minutes}:${seconds}`;
+            document.getElementById('clock').textContent = timeString;
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock(); // initial call to display clock immediately
+    </script>
 </body>
 </html>
