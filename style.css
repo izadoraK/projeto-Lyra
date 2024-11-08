@@ -23,6 +23,11 @@ header .logo {
     font-weight: bold;
 }
 
+header .logo a {
+    color: #fff;
+    text-decoration: none;
+
+}
 
 header ul {
     padding-left: 30px;
@@ -91,7 +96,8 @@ header ul li a {
 .login button,
 .recover-form button,
 .suporte button,
-.historico button {
+.historico button,
+#formulario {
     padding: 15px;
     background-color: #5e7971;
     color: #fff;
@@ -168,3 +174,42 @@ header ul li a {
     border-radius: 5px;
     font-size: 16px;
 }
+
+/*estilização da nova recomendacao*/
+.sentimento,
+.tarefa,
+.porcentagem{
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px gray;
+    width: 700px;
+    padding: 30px;
+    margin:20px auto;
+}
+
+.sentimento h2,
+.tarefa h2,
+.porcentagem h2{
+    margin-bottom: 17px;
+    font-size: 20px;
+}
+
+.sentimento {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.tarefa select option {
+    font-size: 15px;
+}
+
+.tarefa select {
+    padding: 15px;
+    width: 50%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
