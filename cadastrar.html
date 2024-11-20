@@ -24,17 +24,37 @@
         <p>Seu site de recomendação musical para estudos!</p>
         
         <div class="login">
-            <form action="login.html">
-                <input type="matricula" placeholder="Matrícula" required>
-                <input type="email" placeholder="Email" required>
-                <input type="password" placeholder="Senha" required>
+            <form action="http://localhost:5000/usuarios" method="post" id="cadastrar-form">
+                <input type="text" name="matricula" placeholder="Matrícula" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="senha" placeholder="Senha" required>
                 <input type="password" placeholder="Confirmação de senha" required>
                 <button type="submit">Cadastrar</button>
-            </form>
-
+            </form>            
         </div>
 
     </section>
     
 </body>
+
+<script>
+    document.getElementById('cadastrar-form').addEventListener('submit', async (event) => {
+        event.preventDefault(); // Impede o comportamento padrão do formulário
+
+        const formData = new FormData(event.target);
+        const data = Object.fromEntries(formData.entries()); // Converte os dados do formulário em um objeto
+
+        const response = await fetch('http://localhost:5000/usuarios', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+
+        const result = await response.json();
+        alert(result.message); // Mostra a mensagem de sucesso ou erro
+    });
+</script>
+
 </html>

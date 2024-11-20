@@ -24,16 +24,15 @@
         <p>Seu site de recomendação musical para estudos!</p>
         
         <div class="login">
-            <form action="index.html">
-                <input type="matricula" placeholder="Matrícula" required>
-                <input type="email" placeholder="Email" required>
-                <input type="password" placeholder="Senha" required>
+            <form action="http://127.0.0.1:5000/login" method="post">
+                <input type="text" name="matricula" placeholder="Matrícula" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="senha" placeholder="Senha" required>
                 <a href="recuperar_senha.html">Esqueceu a senha?</a>
                 <a href="cadastrar.html">Não possui conta? Crie a sua!</a>
                 
                 <button type="submit">Fazer log-in</button>
             </form>
-
         </div>
 
     </section>
