@@ -120,7 +120,7 @@ header ul li a {
 .upper-left,
 .bottom-left{
     display: block;
-    padding: 24px;
+    padding: 20px;
     margin-bottom: 20px;
     border-radius: 5px;
     background-color: #fff;
@@ -128,7 +128,7 @@ header ul li a {
 }
 
 .relogio{
-    font-size: 48px;
+    font-size: 43px;
     color: #5e7971;
     padding-bottom: 10px;
 }

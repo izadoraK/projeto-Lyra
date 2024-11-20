@@ -1,4 +1,7 @@
-from flask import Flask, request, jsonify
+import base64
+import os
+import random
+from flask import Flask, request, jsonify, send_from_directory
 from flask_mysqldb import MySQL
 from flask_cors import CORS
 
@@ -13,7 +16,18 @@ app.config['MYSQL_DB'] = 'lyra'
 
 mysql = MySQL(app)
 
+# Lista de faixas
+track_ids = [
+    "6wT447V5gCK7mXjuUGpouU"
+]
 
+@app.route("/get-track", methods=["GET"])
+def get_track():
+    track_id = random.choice(track_ids)
+    embed_url = f"https://open.spotify.com/embed/track/{track_id}"
+    return jsonify({"embed_url": embed_url})
+
+# Rota para cadastrar os usuários
 @app.route('/usuarios', methods=['POST'])
 def create_user():
     try:
