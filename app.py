@@ -1,11 +1,13 @@
 import base64
+from binascii import Error
 import os
 import random
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, redirect, request, jsonify, send_from_directory, session, url_for
 from flask_mysqldb import MySQL
 from flask_cors import CORS
 
 app = Flask(__name__)
+app.secret_key = "chave_secreta123"  
 CORS(app)
 
 # Configurações do banco de dados MySQL
@@ -16,7 +18,7 @@ app.config['MYSQL_DB'] = 'lyra'
 
 mysql = MySQL(app)
 
-# Lista de faixas
+# Faixa quando abre o site
 track_ids = [
     "6wT447V5gCK7mXjuUGpouU"
 ]
@@ -26,6 +28,54 @@ def get_track():
     track_id = random.choice(track_ids)
     embed_url = f"https://open.spotify.com/embed/track/{track_id}"
     return jsonify({"embed_url": embed_url})
+
+@app.route('/')
+def login_form():
+    return redirect("login.html")  # Direciona para a página de login diretamente
+
+# Rota para processar o login
+@app.route('/login', methods=['POST'])
+def login():
+    try:
+        # Recebe os dados enviados no corpo da requisição
+        data = request.json
+        matricula = data.get("matricula")
+        email = data.get("email")
+        senha = data.get("senha")
+
+        # Verifica se os campos foram preenchidos
+        if not matricula or not email or not senha:
+            return jsonify({"message": "Preencha todos os campos"}), 400
+
+        # Consulta para verificar credenciais
+        cur = mysql.connection.cursor()
+        query = """
+            SELECT * FROM usuarios 
+            WHERE matricula = %s AND email = %s AND senha = %s
+        """
+        cur.execute(query, (matricula, email, senha))
+        user = cur.fetchone()
+
+        if user:
+            # Armazena informações do usuário na sessão
+            session['user'] = user[0]
+            return jsonify({"message": "Login bem-sucedido"}), 200
+        else:
+            return jsonify({"message": "Credenciais inválidas, digite corretamente"}), 401
+
+    except Exception as e:
+        return jsonify({"message": f"Erro no banco de dados: {str(e)}"}), 500
+
+    finally:
+        cur.close()
+
+# Rota para página inicial (opcional, se renderizar diretamente)
+@app.route('/index')
+def index():
+    if 'user' in session:
+        return redirect("index.html")  # Certifique-se de que index.html está acessível
+    else:
+        return redirect(url_for('login_form'))
 
 # Rota para cadastrar os usuários
 @app.route('/usuarios', methods=['POST'])
@@ -51,8 +101,6 @@ def create_user():
 
     except Exception as e:
         return jsonify(message=f"Erro ao cadastrar usuário: {str(e)}"), 500
-
-
 
 if __name__ == '__main__':
     app.run(debug=True)
