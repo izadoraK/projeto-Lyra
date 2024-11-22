@@ -65,7 +65,7 @@
 
         async function loadSpotifyEmbed() {
         try {
-            const response = await fetch('http://127.0.0.1:5000/get-track');
+            const response = await fetch('http://127.0.0.1:5000/get-initial-track');
             const data = await response.json();
             document.getElementById('spotify-embed').src = data.embed_url;
         } catch (error) {

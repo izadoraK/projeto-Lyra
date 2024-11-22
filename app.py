@@ -5,6 +5,8 @@ import random
 from flask import Flask, redirect, request, jsonify, send_from_directory, session, url_for
 from flask_mysqldb import MySQL
 from flask_cors import CORS
+import bcrypt
+
 
 app = Flask(__name__)
 app.secret_key = "chave_secreta123"  
@@ -23,8 +25,8 @@ track_ids = [
     "6wT447V5gCK7mXjuUGpouU"
 ]
 
-@app.route("/get-track", methods=["GET"])
-def get_track():
+@app.route("/get-initial-track", methods=["GET"])
+def get_initial_track():
     track_id = random.choice(track_ids)
     embed_url = f"https://open.spotify.com/embed/track/{track_id}"
     return jsonify({"embed_url": embed_url})
@@ -56,9 +58,9 @@ def login():
         cur.execute(query, (matricula, email, senha))
         user = cur.fetchone()
 
-        if user:
+        if user and bcrypt.checkpw(senha.encode('utf-8'), user[0].encode('utf-8')):
             # Armazena informações do usuário na sessão
-            session['user'] = user[0]
+            session['user'] = matricula
             return jsonify({"message": "Login bem-sucedido"}), 200
         else:
             return jsonify({"message": "Credenciais inválidas, digite corretamente"}), 401
@@ -91,6 +93,9 @@ def create_user():
         if not matricula or not email or not senha:
             return jsonify(message="Todos os campos são obrigatórios!"), 400
 
+        salt = bcrypt.gensalt()
+        hashed_password = bcrypt.hashpw(senha.encode('utf-8'), salt)
+        
         # Inserir no banco de dados
         cur = mysql.connection.cursor()
         cur.execute("INSERT INTO usuarios (matricula, senha, email) VALUES (%s, %s, %s)", (matricula, senha, email))
