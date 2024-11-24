@@ -31,8 +31,8 @@
                         <button type="submit">Nova recomendação</button>
                     </form>
 
-                    <form action="favoritas.html">
-                        <button type="submit">Minhas faixas favortias</button>
+                    <form action="historico.html">
+                        <button type="submit">Todas faixas ouvidas</button>
                     </form>
                 </div>
             </div>
@@ -43,7 +43,7 @@
         </div>
         <div class="upper-right">
             <div class="opcoes">
-                <iframe id="spotify-embed" src="" width="300" height="380" frameborder="0"
+                <iframe id="spotify-embed" src="https://open.spotify.com/embed/track/6wT447V5gCK7mXjuUGpouU" width="300" height="380" frameborder="0"
                     allowtransparency="true" allow="encrypted-media"></iframe>
 
             </div>
@@ -63,18 +63,6 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        async function loadSpotifyEmbed() {
-        try {
-            const response = await fetch('http://127.0.0.1:5000/get-initial-track');
-            const data = await response.json();
-            document.getElementById('spotify-embed').src = data.embed_url;
-        } catch (error) {
-            console.error("Erro ao carregar o Spotify Embed:", error);
-        }
-    }
-
-    // Carregar a faixa ao carregar a página
-    loadSpotifyEmbed();
     </script>
 </body>
 
