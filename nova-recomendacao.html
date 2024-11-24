@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lyra</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
     <header>
@@ -22,42 +24,126 @@
     <section class="center">
         <h1>Nova recomendação</h1>
         <p>Vamos ouvir uma nova faixa?</p>
-        
-        <form action="./index.html" method="post">
+
+        <form id="recomendacaoForm" method="post">
             <div class="sentimento">
-            <h2>Como você está se sentindo?</h2>
-            <label>
-                <input type="checkbox" name="sentimento" value="feliz"> Feliz
-            </label><br>
-            <label>
-                <input type="checkbox" name="sentimento" value="triste"> Triste
-            </label><br>
-            <label>
-                <input type="checkbox" name="sentimento" value="animado"> Animado
-            </label><br>
-            <label>
-                <input type="checkbox" name="sentimento" value="calmo"> Calmo
-            </label>
+                <h2>Como você está se sentindo?</h2>
+                <label>
+                    <input type="checkbox" name="sentimento" value="feliz"> Feliz
+                </label><br>
+                <label>
+                    <input type="checkbox" name="sentimento" value="triste"> Triste
+                </label><br>
+                <label>
+                    <input type="checkbox" name="sentimento" value="animado"> Animado
+                </label><br>
+                <label>
+                    <input type="checkbox" name="sentimento" value="calmo"> Calmo
+                </label>
             </div>
 
             <div class="tarefa">
-            <h2>O que irá estudar?</h2>
-            <select id="tarefa-select" name="tarefa">
-                <option value="criativa">Atividade criativa</option>
-                <option value="logica">Atividade lógica</option>
-            </select>
+                <h2>O que irá estudar?</h2>
+                <select id="tarefa-select" name="tarefa">
+                    <option value="criativa">Atividade criativa</option>
+                    <option value="logica">Atividade lógica</option>
+                </select>
             </div>
 
             <div class="porcentagem">
-            <h2>Qual a porcentagem de foco que deseja?</h2>
-            <input type="range" id="foco-range" name="foco" min="0" max="100" value="50" oninput="document.getElementById('foco-value').textContent = this.value + '%'">
-            <span id="foco-value">50%</span>
+                <h2>Qual a porcentagem de foco que deseja?</h2>
+                <input type="range" id="foco-range" name="foco" min="0" max="100" value="50"
+                    oninput="document.getElementById('foco-value').textContent = this.value + '%'">
+                <span id="foco-value">50%</span>
             </div>
 
             <button id="formulario" type="submit">Enviar</button>
         </form>
 
+        <div id="popupMatricula" class="popup">
+            <div class="popup-content">
+                <span class="close">&times;</span>
+                <p>Informe sua matrícula:</p>
+                <input type="text" id="matriculaInput" name="matricula"><br><br>
+                <button id="submitMatricula">Enviar Matrícula</button>
+            </div>
+        </div>
+
+        <!--<h2 id="tituloEmbed">Sua recomendação musical abaixo:</h2>
+    <iframe id="spotify-embed" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>-->
+
+        <div id="popupSpotify" class="popup">
+            <div class="popup-content">
+                <span class="close">&times;</span>
+                <iframe id="spotify-embed" width="300" height="380" frameborder="0" allowtransparency="true"
+                    allow="encrypted-media"></iframe>
+            </div>
+        </div>
+
+
+
+
     </section>
-    
+    <script>
+        let formData;
+
+        document.getElementById('recomendacaoForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            formData = new FormData(event.target);
+            document.getElementById('popupMatricula').style.display = 'flex'; // Mostra o popup da matrícula
+        });
+
+        document.getElementById('submitMatricula').addEventListener('click', async function () {
+            const matricula = document.getElementById('matriculaInput').value;
+           
+            const matriculaResponse = await fetch('http://127.0.0.1:5000/get-track', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ matricula: matricula })
+        });
+
+            document.getElementById('popupMatricula').style.display = 'none';
+            formData.append('matricula', matricula);
+
+            // Converte formData para um objeto JSON
+        const formDataObj = Object.fromEntries(formData.entries());
+        console.log("Dados enviados:", formDataObj);
+
+        // Após enviar a matrícula, faça a requisição para obter o embed do Spotify
+        const response = await fetch('http://127.0.0.1:5000/get-track', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formDataObj)
+        });
+
+            const data = await response.json();
+            if (data.embed_url) {
+                document.getElementById('spotify-embed').src = data.embed_url;
+                document.getElementById('popupSpotify').style.display = 'flex'; // Mostra o popup do Spotify
+
+            } else {
+                console.error("Erro ao carregar o Spotify Embed:", data.error);
+            }
+        });
+
+        document.querySelectorAll('.close').forEach(function (element) {
+            element.addEventListener('click', function () {
+                document.getElementById('popupSpotify').style.display = 'none';
+                document.getElementById('popupMatricula').style.display = 'none';
+            });
+        });
+
+        window.onclick = function (event) {
+            if (event.target == document.getElementById('popupSpotify') || event.target == document.getElementById('popupMatricula')) {
+                document.getElementById('popupSpotify').style.display = 'none';
+                document.getElementById('popupMatricula').style.display = 'none';
+            }
+        }
+    </script>
 </body>
+
 </html>
