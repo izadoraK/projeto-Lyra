@@ -18,17 +18,6 @@ app.config['MYSQL_DB'] = 'lyra'
 
 mysql = MySQL(app)
 
-# Faixa quando abre o site
-track_ids = [
-    "6wT447V5gCK7mXjuUGpouU"
-]
-
-@app.route("/get-initial-track", methods=["GET"])
-def get_initial_track():
-    track_id = random.choice(track_ids)
-    embed_url = f"https://open.spotify.com/embed/track/{track_id}"
-    return jsonify({"embed_url": embed_url})
-
 @app.route('/')
 def login_form():
     return redirect("login.html")  # Direciona para a página de login diretamente
@@ -117,6 +106,27 @@ def create_user():
 
     except Exception as e:
         return jsonify(message=f"Erro ao cadastrar usuário: {str(e)}"), 500
+    
+@app.route('/historico', methods=['GET'])
+def get_historico():
+    try:
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT ouvidas.data, musicas.nome, musicas.link FROM musicas, ouvidas WHERE musicas.ID=ouvidas.idMusica")
+        historico = cur.fetchall()
+        cur.close()
+
+        historico_list = []
+        for row in historico:
+            historico_list.append({
+                'data': row[0],
+                'nome': row[1],
+                'link': row[2]
+            })
+
+        return jsonify(historico), 200
+
+    except Exception as e:
+        return jsonify(message=f"Erro ao buscar histórico: {str(e)}"), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
