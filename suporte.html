@@ -24,19 +24,45 @@
         <p>Deixe sua dúvida ou problema abaixo!</p>
         
         <div class="suporte">
-            <form action="#">
+            <form action="/suporte">
 
-                <input type="text" id="name" name="name" placeholder="Digite seu nome" required>
+                <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
 
-                <textarea id="message" name="message" placeholder="Digite sua mensagem" required></textarea>
-            
+                <textarea id="message" name="message" placeholder="Digite sua mensagem" required autocomplete="off"></textarea>
+        
                 <button type="submit">Enviar</button>
-                
             </form>
-
         </div>
 
     </section>
-    
+    <script>
+        document.querySelector('form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            if (!email || !message) {
+            alert('Por favor, preencha todos os campos.');
+            return;
+            }
+
+            fetch('http://127.0.0.1:5000/suporte', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email: email, message: message })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Mensagem enviada com sucesso!');
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                alert('Ocorreu um erro ao enviar a mensagem.');
+            });
+        });
+    </script>
 </body>
 </html>
