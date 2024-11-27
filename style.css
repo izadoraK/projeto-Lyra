@@ -85,7 +85,8 @@ header ul li a {
 .login input, 
 .login textarea,
 .suporte input, 
-.suporte textarea  {
+.suporte textarea,
+#matriculaInput  {
     margin-bottom: 20px;
     padding: 15px;
     border: 1px solid #ccc;
@@ -97,7 +98,8 @@ header ul li a {
 .recover-form button,
 .suporte button,
 .historico button,
-#formulario {
+#formulario,
+#submitMatricula {
     padding: 15px;
     background-color: #5e7971;
     color: #fff;
@@ -151,30 +153,6 @@ header ul li a {
     padding-bottom: 15px;
 }
 
-.recover-form h2,
-.recover-form p {
-    color: #333;
-    padding-bottom: 10px;
-}
-
-.recover-form {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px gray;
-    width: 500px;
-    padding: 30px;
-    margin: 0 auto;
-}
-
-.recover-form input[type="email"] {
-    padding: 15px;
-    width: 70%;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
 /*estilização da nova recomendacao*/
 .sentimento,
 .tarefa,
@@ -211,7 +189,7 @@ header ul li a {
 
 #spotify-embed {
     width: 100%;
-    height: 380px; /* Ajuste conforme necessário */
+    height: 380px; 
     border: none;
 }
 
