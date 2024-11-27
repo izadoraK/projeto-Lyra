@@ -105,11 +105,19 @@ def create_user():
     except Exception as e:
         return jsonify(message=f"Erro ao cadastrar usuário: {str(e)}"), 500
     
-@app.route('/historico', methods=['GET'])
+@app.route('/historico', methods=['POST'])
 def get_historico():
+    data = request.json
+    matricula = data.get('matricula')
+    print(f'Recebido matrícula: {matricula}')
+
+    cursor = mysql.connection.cursor()
+    cursor.execute("SELECT id FROM usuarios WHERE matricula = %s", (matricula,))
+    idUser = cursor.fetchone()
+    
     try:
         cur = mysql.connection.cursor()
-        cur.execute("SELECT ouvidas.data, musicas.nome, musicas.link FROM musicas, ouvidas WHERE musicas.ID=ouvidas.idMusica")
+        cur.execute("SELECT ouvidas.data, musicas.nome, musicas.link FROM musicas JOIN ouvidas ON musicas.ID = ouvidas.idMusica WHERE ouvidas.idUser = %s", (idUser,))
         historico = cur.fetchall()
         cur.close()
 
@@ -125,7 +133,7 @@ def get_historico():
 
     except Exception as e:
         return jsonify(message=f"Erro ao buscar histórico: {str(e)}"), 500
-    
+
 @app.route('/suporte', methods=['POST'])
 def create_suporte():
     try:
