@@ -82,11 +82,11 @@ header ul li a {
     flex-direction: column;
 }
 
-.login input, 
+.login input,
 .login textarea,
-.suporte input, 
+.suporte input,
 .suporte textarea,
-#matriculaInput  {
+#matriculaInput {
     margin-bottom: 20px;
     padding: 15px;
     border: 1px solid #ccc;
@@ -120,7 +120,7 @@ header ul li a {
 }
 
 .upper-left,
-.bottom-left{
+.bottom-left {
     display: block;
     padding: 20px;
     margin-bottom: 20px;
@@ -129,7 +129,7 @@ header ul li a {
     box-shadow: 0 0 10px gray;
 }
 
-.relogio{
+.relogio {
     font-size: 43px;
     color: #5e7971;
     padding-bottom: 10px;
@@ -147,7 +147,7 @@ header ul li a {
 }
 
 /*estilizações do login*/
-.login a{
+.login a {
     color: #5e7971;
     text-decoration: none;
     padding-bottom: 15px;
@@ -156,14 +156,14 @@ header ul li a {
 /*estilização da nova recomendacao*/
 .sentimento,
 .tarefa,
-.porcentagem{
+.porcentagem {
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px gray;
     width: 700px;
     padding: 30px;
-    margin:20px auto;
+    margin: 20px auto;
 }
 
 .popup {
@@ -172,7 +172,7 @@ header ul li a {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
     justify-content: center;
     align-items: center;
 }
@@ -189,7 +189,7 @@ header ul li a {
 
 #spotify-embed {
     width: 100%;
-    height: 380px; 
+    height: 380px;
     border: none;
 }
 
@@ -209,7 +209,7 @@ header ul li a {
 
 .sentimento h2,
 .tarefa h2,
-.porcentagem h2{
+.porcentagem h2 {
     margin-bottom: 17px;
     font-size: 20px;
 }
@@ -233,11 +233,17 @@ header ul li a {
 }
 
 /*estilizações do historico*/
-#faixas div{
+#faixas div {
     padding: 23px;
     padding-bottom: 5px;
     background-color: #f0f0f0;
     border-radius: 5px;
     box-shadow: 0 0 10px gray;
-    margin: 20px ;
+    margin: 20px;
+}
+
+#popupMatricula label{
+    font-size: 22px;
+    font-weight: bold;
+    
 }
