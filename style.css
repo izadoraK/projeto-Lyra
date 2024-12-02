@@ -1,4 +1,4 @@
-/*estilizações gerais*/
+
 * {
     margin: 0;
     padding: 0;
@@ -109,7 +109,7 @@ header ul li a {
     font-size: 16px;
 }
 
-/*estilizações do index*/
+
 .left,
 .upper-right {
     text-align: center;
@@ -146,14 +146,14 @@ header ul li a {
     font-size: 16px;
 }
 
-/*estilizações do login*/
+
 .login a {
     color: #5e7971;
     text-decoration: none;
     padding-bottom: 15px;
 }
 
-/*estilização da nova recomendacao*/
+
 .sentimento,
 .tarefa,
 .porcentagem {
@@ -232,7 +232,7 @@ header ul li a {
     font-size: 16px;
 }
 
-/*estilizações do historico*/
+
 #faixas div {
     padding: 23px;
     padding-bottom: 5px;

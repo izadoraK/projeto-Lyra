@@ -45,27 +45,27 @@
         </div>
     </section>
     <script>
-    // JavaScript para abrir o popup quando a página carregar
+    
     window.onload = function() {
         var popup = document.getElementById("popupMatricula");
         var span = document.getElementsByClassName("close")[0];
 
-        // Abrir o modal
+        
         popup.style.display = "block";
 
-        // Fechar o modal quando o usuário clicar no X
+        
         span.onclick = function() {
             popup.style.display = "none";
         }
 
-        // Fechar o modal quando o usuário clicar fora do modal
+        
         window.onclick = function(event) {
             if (event.target == popup) {
                 popup.style.display = "none";
             }
         }
 
-        // Enviar a matrícula para o backend e obter o histórico
+        
         document.getElementById("matriculaForm").onsubmit = function(event) {
             event.preventDefault();
             var matricula = document.getElementById("matriculaInput").value;
@@ -79,7 +79,7 @@
             .then(response => response.json())
             .then(data => {
                 var historicoContent = document.getElementById("faixas");
-                historicoContent.innerHTML = ''; // Limpa o conteúdo anterior
+                historicoContent.innerHTML = ''; 
                 data.forEach(faixa => {
                     const faixaElement = document.createElement('div');
                     faixaElement.innerHTML = `

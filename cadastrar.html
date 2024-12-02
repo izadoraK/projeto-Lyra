@@ -39,10 +39,10 @@
 
 <script>
     document.getElementById('cadastrar-form').addEventListener('submit', async (event) => {
-        event.preventDefault(); // Impede o comportamento padrão do formulário
+        event.preventDefault(); 
 
         const formData = new FormData(event.target);
-        const data = Object.fromEntries(formData.entries()); // Converte os dados do formulário em um objeto
+        const data = Object.fromEntries(formData.entries()); 
 
         const response = await fetch('http://localhost:5000/usuarios', {
             method: 'POST',
@@ -53,7 +53,7 @@
         });
 
         const result = await response.json();
-        alert(result.message); // Mostra a mensagem de sucesso ou erro
+        alert(result.message); 
     });
 </script>
 

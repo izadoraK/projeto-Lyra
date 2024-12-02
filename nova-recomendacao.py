@@ -8,7 +8,7 @@ from flask_mysqldb import MySQL
 app = Flask(__name__)
 CORS(app)
 
-# Configurações do banco de dados MySQL
+
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
@@ -16,7 +16,7 @@ app.config['MYSQL_DB'] = 'lyra'
 
 mysql = MySQL(app)
 
-#rota para fazer post do formulario de nova recomendaçao (em nova-recomendacao.html)
+
 
 @app.route('/get-track', methods=['POST'])
 def get_track():
@@ -49,7 +49,7 @@ def get_track():
 
     print(f"Sentimento: {sentimento}, Tarefa: {tarefa}, Foco: {foco}")
 
-    # Lógica de seleção de acordo com foco aqui"""
+    
     if (foco>=0 and foco<=25):
         track_ids = [
             "0sZy1HE2aGBQABHfVRQ4jB",
@@ -96,7 +96,7 @@ def get_track():
     
     embed_url = f"https://open.spotify.com/embed/track/{track_id}"
 
-    #Salvar id user e id musica recomendada no banco de dados 
+     
     '''idUser = 1  # Substitua pela lógica real para obter o idUser
     idMusica = 1  # Substitua pela lógica real para obter o idMusica
     print(f"Inserindo no banco: idUser={idUser}, idMusica={idMusica}, data={datetime.now()}")'''

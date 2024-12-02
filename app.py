@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.secret_key = "chave_secreta123"  
 CORS(app)
 
-# Configurações do banco de dados MySQL
+
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
@@ -20,28 +20,28 @@ mysql = MySQL(app)
 
 @app.route('/')
 def login_form():
-    return redirect("login.html")  # Direciona para a página de login diretamente
+    return redirect("login.html")  
 
 def hash_password(password):
     return hashlib.sha256(password.encode('utf-8')).hexdigest()
 
-# Rota para processar o login
+
 @app.route('/login', methods=['POST'])
 def login():
     try:
-        # Recebe os dados enviados no corpo da requisição
+        
         data = request.json
         matricula = data.get("matricula")
         email = data.get("email")
         senha = data.get("senha")
 
-        # Verifica se os campos foram preenchidos
+        
         if not matricula or not email or not senha:
             return jsonify({"message": "Preencha todos os campos"}), 400
 
         hashed_password = hash_password(senha)
 
-        # Consulta para verificar credenciais
+        
         cur = mysql.connection.cursor()
         query = """
             SELECT * FROM usuarios 
@@ -61,29 +61,28 @@ def login():
     finally:
         cur.close()
 
-# Rota para página inicial (opcional, se renderizar diretamente)
+
 @app.route('/index')
 def index():
-    #if 'user' in session:
-        return redirect("index.html")  # Certifique-se de que index.html está acessível
-   # else:
-    #    return redirect(url_for('login_form'))
+    
+        return redirect("index.html")  
+   
 
-# Rota para cadastrar os usuários
+
 @app.route('/usuarios', methods=['POST'])
 def create_user():
     try:
-        # Capturar os dados do JSON enviado
+        
         data = request.json
         matricula = data.get('matricula')
         email = data.get('email')
         senha = data.get('senha')
 
-        # Verificar se todos os campos foram enviados
+        
         if not matricula or not email or not senha:
             return jsonify(message="Todos os campos são obrigatórios!"), 400
 
-        # Verificar se a matrícula já existe no banco
+        
         cur = mysql.connection.cursor()
         cur.execute("SELECT * FROM usuarios WHERE matricula = %s", (matricula,))
         existing_user = cur.fetchone()
@@ -94,7 +93,7 @@ def create_user():
 
         hashed_password = hash_password(senha)
         
-        # Inserir no banco de dados
+        
         cur = mysql.connection.cursor()
         cur.execute("INSERT INTO usuarios (matricula, senha, email) VALUES (%s, %s, %s)", (matricula, hashed_password, email))
         mysql.connection.commit()
